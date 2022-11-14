@@ -23,3 +23,5 @@ Route::post('/store', [ProdutoController::class, 'store']);
 Route::post('/destroy', [ProdutoController::class, 'destroy']);
  
 Route::post('/update', [ProdutoController::class, 'update']);
+
+Route::get('/search', [ProdutoController::class, 'search']);

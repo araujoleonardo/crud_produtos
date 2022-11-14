@@ -2,7 +2,12 @@
   
 @section('content')
 <h1 class="page-header text-center">CRUD Produtos</h1>
-
+<div class="row form-group">
+    <div class="col-md-11 col-md-offset-1">
+        <input type="search" name="search" id="search" class="form-control" placeholder="Search ..." />
+    </div>    
+</div>
+<br>
 <div class="row">
     <div class="col-md-9 col-md-offset-1">
         <h2>Tabela de produtos</h2>
@@ -23,6 +28,9 @@
             </thead>
             <tbody id="produtoBody">
             </tbody>
+            <tbody id="pesquisa">
+            </tbody>
+
         </table>
     </div>
 </div>
@@ -111,5 +119,27 @@
                 $('#produtoBody').empty().html(data);
             });
         }
+
+        //Módulo de busca
+        $('#search').on('keyup', function() {
+            $value=$(this).val();
+
+            if ($value){
+                $('#produtoBody').hide();
+            }
+
+            $.ajax({
+
+                type:'get',
+                url:'{{URL::to('search')}}',
+                data:{'search':$value},
+
+                success:function(data) {
+                    $('#pesquisa').html(data);
+                }
+
+            });
+            
+        })
     </script>
 @endsection
